@@ -75,3 +75,21 @@ if __name__ == "__main__":
     estatisticas.register("med",numpy.mean)
     estatisticas.register("std",numpy.std)
     populacao,info = algorithms.eaSimple(populacao,toolbox,probabilidade_crossover,probabilidade_mutacao,numero_geracoes,estatisticas)
+
+    melhores = tools.selBest(populacao,2)
+    for individuo in melhores:
+        print(individuo)
+        print(individuo.fitness)
+        print(individuo[0])
+        soma = 0
+        for i in range(len(lista_produtos)):
+            if individuo[i] == 1:
+                soma += valores[i]
+                print(f"nome {lista_produtos[i].nome} r$ {lista_produtos[i].valor}")
+
+        print(f"melhor solucao {soma}")
+    
+    valores_grafico = info.select("max")
+    plt.plot(valores_grafico)
+    plt.title("Acompanhamento de Valores")
+    plt.show()
